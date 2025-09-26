@@ -1,0 +1,23 @@
+- JavaScript main work is Action
+- In Dom Manipulation we can chnge HTML, CSS and also perform actions
+- With Js we can make Chrome extensions 
+- Syntax isthe structure of words in asentence , For programming exact syntax must be followed
+- Browser doing rendering means (html/css/js =download> Browser =rendring> Web page)
+- Js fetch and sends info to server 
+- Js runs at the client side in the browser 
+- coffe script / TypeScript are transpiled(chnge) to JavaScript ( every new thing(typescript) is convert into the normal JS)
+- code => (compiler) => executable
+- code => (transpiler) => code
+- (x)=>x + 1 => (transpiler) function(x){return x + 1; } 
+- Modules(%) oprator to get remainder in inter=ger division 
+- calculation is execute in BODMAS (Opreation start by left to right)
+- Number in JS ( Integers , Floating(decimals) )
+- Tips :- Avoid floating calculation 
+- Use Math.round(0.1 + 0.2 ) ignore after point value for round figure 
+- For dom always use querySelector()
+- atribute like onclick ... here we can use java script in onclick function direct, onclick("here we can write js") , example =>onclick("alert("button is clicked")")
+- All variable are has its own scope 
+- Variable re difine in scope 
+- var does not follow scope
+- function in reusable code
+v   	                                                     
