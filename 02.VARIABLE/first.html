@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <button onclick="addToBeg()">add to bag</button>
+    <button onclick="moveToWishList()">move to wish list</button>
+    <button onclick="saleItem()">add 1 + 1 item in sale</button>
+
+    <h1 id="item"></h1>
+    <script>
+    let i = 0;    
+    let item = document.querySelector("#item").innerText = `Your bag has ${i}`
+    
+    function addToBeg(){
+        i ++;
+        document.querySelector("#item").innerText = `Your bag has ${i}`
+    }
+        function moveToWishList(){
+        i--;
+        document.querySelector("#item").innerText = `Your bag has ${i}`
+    }
+     function saleItem(){
+        i += 2;
+        document.querySelector("#item").innerText = `Your bag has ${i}`
+    }
+    </script>
+</body>
+</html>

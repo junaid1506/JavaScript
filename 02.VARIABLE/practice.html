@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 
+    
+    1. save your name in a variable 
+    2.Display name on the variable 
+    3. Calcualte the cost of the myntra bag and keeep it in a variable 
+    4. show it n the console 
+    5. keep GST percentage as constant 
+    6. Use eval method from math to convert string calculation into result 
+    
+    
+    
+    -->
+</head>
+<body>
+
+    <h1 id="name"></h1>
+
+
+
+    <script>
+      // Display name
+        const name = "Junaid";
+        document.querySelector("#name").innerText = name;
+
+        // Prices
+        let tShirt = 1245;
+        let bag = 389;
+
+        // GST percentage
+        const gst = 18;
+
+        // Total with GST
+        let total = (tShirt + bag) * (1 + gst / 100);
+
+        // Show in console and on page
+        console.log("Total with GST:", total.toFixed(2));
+
+
+
+    </script>
+</body>
+</html>

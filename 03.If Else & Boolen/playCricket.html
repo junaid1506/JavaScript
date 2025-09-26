@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enhanced Cricket Game</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        color: #333;
+      }
+
+      .game-container {
+        background-color: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        width: 100%;
+        max-width: 900px;
+        padding: 30px;
+        text-align: center;
+        transition: transform 0.3s ease;
+      }
+
+      .game-container:hover {
+        transform: translateY(-5px);
+      }
+
+      h1 {
+        color: #1a2a6c;
+        margin-bottom: 10px;
+        font-size: 2.8rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .subtitle {
+        color: #666;
+        margin-bottom: 30px;
+        font-size: 1.2rem;
+      }
+
+      .stats-container {
+        display: flex;
+        justify-content: space-around;
+        margin: 20px 0;
+        flex-wrap: wrap;
+      }
+
+      .stat-box {
+        background: linear-gradient(to right, #1a2a6c, #b21f1f);
+        color: white;
+        padding: 15px;
+        border-radius: 10px;
+        min-width: 150px;
+        margin: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .stat-value {
+        font-size: 2rem;
+        font-weight: 700;
+      }
+
+      .game-area {
+        display: flex;
+        justify-content: space-between;
+        margin: 30px 0;
+        flex-wrap: wrap;
+      }
+
+      .player-section,
+      .computer-section {
+        flex: 1;
+        min-width: 300px;
+        padding: 20px;
+        border-radius: 15px;
+        background: rgba(255, 255, 255, 0.7);
+        margin: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        color: #1a2a6c;
+        font-weight: 600;
+      }
+
+      .choices {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin: 20px 0;
+      }
+
+      .choice-btn {
+        background: linear-gradient(to right, #1a2a6c, #b21f1f);
+        color: white;
+        border: none;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .choice-btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      .choice-btn:active {
+        transform: scale(0.95);
+      }
+
+      .choice-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .choice-icon {
+        font-size: 2.5rem;
+        margin-bottom: 5px;
+      }
+
+      .selected-choice {
+        font-size: 5rem;
+        margin: 20px 0;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.5s ease;
+      }
+
+      .choice-animation {
+        animation: pulse 0.5s ease;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.2);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      .result-section {
+        margin: 30px 0;
+        padding: 20px;
+        border-radius: 15px;
+        background: rgba(255, 255, 255, 0.7);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .result-message {
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 20px 0;
+        min-height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+      }
+
+      .win {
+        color: #2e7d32;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+      }
+
+      .lose {
+        color: #c62828;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+      }
+
+      .draw {
+        color: #ef6c00;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+      }
+
+      .controls {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin: 20px 0;
+        flex-wrap: wrap;
+      }
+
+      .control-btn {
+        background: linear-gradient(to right, #1a2a6c, #b21f1f);
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        font-size: 1.1rem;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .control-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      .control-btn:active {
+        transform: scale(0.98);
+      }
+
+      .history-section {
+        margin-top: 30px;
+        text-align: left;
+        background: rgba(255, 255, 255, 0.7);
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        max-height: 200px;
+        overflow-y: auto;
+      }
+
+      .history-section h3 {
+        color: #1a2a6c;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+
+      .history-item {
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .history-item:last-child {
+        border-bottom: none;
+      }
+
+      .rules {
+        margin-top: 30px;
+        text-align: left;
+        background: rgba(255, 255, 255, 0.7);
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .rules h3 {
+        color: #1a2a6c;
+        margin-bottom: 10px;
+      }
+
+      .rules ul {
+        padding-left: 20px;
+      }
+
+      .rules li {
+        margin-bottom: 8px;
+      }
+
+      .difficulty-selector {
+        margin: 20px 0;
+      }
+
+      .difficulty-btn {
+        background: #e0e0e0;
+        border: none;
+        padding: 8px 15px;
+        margin: 0 5px;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .difficulty-btn.active {
+        background: linear-gradient(to right, #1a2a6c, #b21f1f);
+        color: white;
+      }
+
+      @media (max-width: 768px) {
+        .game-area {
+          flex-direction: column;
+        }
+
+        .player-section,
+        .computer-section {
+          min-width: 100%;
+        }
+
+        h1 {
+          font-size: 2.2rem;
+        }
+
+        .choice-btn {
+          width: 80px;
+          height: 80px;
+          font-size: 1.2rem;
+        }
+
+        .choice-icon {
+          font-size: 2rem;
+        }
+
+        .controls {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .control-btn {
+          width: 80%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="game-container">
+      <h1>🏏 Enhanced Cricket Game</h1>
+      <p class="subtitle">Bat vs Ball vs Stump - More features, more fun!</p>
+
+      <div class="stats-container">
+        <div class="stat-box">
+          <div>Player Score</div>
+          <div class="stat-value" id="player-score">0</div>
+        </div>
+        <div class="stat-box">
+          <div>Computer Score</div>
+          <div class="stat-value" id="computer-score">0</div>
+        </div>
+        <div class="stat-box">
+          <div>Round</div>
+          <div class="stat-value" id="round">1</div>
+        </div>
+        <div class="stat-box">
+          <div>Win Rate</div>
+          <div class="stat-value" id="win-rate">0%</div>
+        </div>
+      </div>
+
+      <div class="difficulty-selector">
+        <h3>Difficulty Level:</h3>
+        <button class="difficulty-btn active" onclick="setDifficulty('easy')">
+          Easy
+        </button>
+        <button class="difficulty-btn" onclick="setDifficulty('medium')">
+          Medium
+        </button>
+        <button class="difficulty-btn" onclick="setDifficulty('hard')">
+          Hard
+        </button>
+      </div>
+
+      <div class="game-area">
+        <div class="player-section">
+          <h2 class="section-title">Your Choice</h2>
+          <div class="choices">
+            <button class="choice-btn" onclick="playGame('bat')">
+              <span class="choice-icon">🏏</span>
+              Bat
+            </button>
+            <button class="choice-btn" onclick="playGame('ball')">
+              <span class="choice-icon">⚾</span>
+              Ball
+            </button>
+            <button class="choice-btn" onclick="playGame('stump')">
+              <span class="choice-icon">🎯</span>
+              Stump
+            </button>
+          </div>
+          <div class="selected-choice" id="player-choice">-</div>
+        </div>
+
+        <div class="computer-section">
+          <h2 class="section-title">Computer's Choice</h2>
+          <div class="selected-choice" id="computer-choice">-</div>
+          <p>Computer will choose after you make your selection</p>
+        </div>
+      </div>
+
+      <div class="result-section">
+        <h2 class="section-title">Result</h2>
+        <div class="result-message" id="result-message">Make your move!</div>
+      </div>
+
+      <div class="controls">
+        <button class="control-btn" onclick="resetGame()">Reset Game</button>
+        <button class="control-btn" onclick="autoPlay()">
+          Auto Play (10 Rounds)
+        </button>
+        <button class="control-btn" onclick="toggleSound()">
+          Toggle Sound
+        </button>
+      </div>
+
+      <div class="history-section">
+        <h3>Game History</h3>
+        <div id="history-list"></div>
+      </div>
+
+      <div class="rules">
+        <h3>Game Rules:</h3>
+        <ul>
+          <li><strong>Bat beats Ball</strong> - The batsman hits the ball</li>
+          <li><strong>Ball beats Stump</strong> - The ball hits the stump</li>
+          <li><strong>Stump beats Bat</strong> - The stump stops the bat</li>
+          <li>Same choices result in a draw</li>
+        </ul>
+      </div>
+    </div>
+
+    <script>
+      // Game state
+      let playerScore = 0;
+      let computerScore = 0;
+      let round = 1;
+      let totalGames = 0;
+      let playerWins = 0;
+      let difficulty = "easy";
+      let soundEnabled = true;
+      let gameHistory = [];
+
+      // Sound effects
+      const winSound = new Audio(
+        "data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA"
+      );
+      const loseSound = new Audio(
+        "data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA"
+      );
+      const drawSound = new Audio(
+        "data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA"
+      );
+
+      // Simple beep sounds (in a real app, you'd use proper sound files)
+      winSound.src =
+        "data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA";
+      loseSound.src =
+        "data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA";
+      drawSound.src =
+        "data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA";
+
+      function playGame(playerChoice) {
+        // Disable buttons during animation
+        disableChoiceButtons(true);
+
+        // Get computer's choice based on difficulty
+        const computerChoice = getComputerChoice(playerChoice);
+
+        // Update UI with choices
+        document.getElementById("player-choice").textContent =
+          getEmoji(playerChoice);
+        document.getElementById("computer-choice").textContent =
+          getEmoji(computerChoice);
+
+        // Add animation
+        document
+          .getElementById("player-choice")
+          .classList.add("choice-animation");
+        document
+          .getElementById("computer-choice")
+          .classList.add("choice-animation");
+
+        // Determine the winner after a short delay for animation
+        setTimeout(() => {
+          determineWinner(playerChoice, computerChoice);
+          document
+            .getElementById("player-choice")
+            .classList.remove("choice-animation");
+          document
+            .getElementById("computer-choice")
+            .classList.remove("choice-animation");
+          disableChoiceButtons(false);
+        }, 500);
+      }
+
+      function getComputerChoice(playerChoice) {
+        const choices = ["bat", "ball", "stump"];
+
+        if (difficulty === "easy") {
+          // Easy: completely random
+          return choices[Math.floor(Math.random() * 3)];
+        } else if (difficulty === "medium") {
+          // Medium: slightly weighted against player's last choice
+          if (Math.random() < 0.3 && gameHistory.length > 0) {
+            const lastPlayerChoice = gameHistory[gameHistory.length - 1].player;
+            const winningChoice = getWinningChoice(lastPlayerChoice);
+            return winningChoice;
+          }
+          return choices[Math.floor(Math.random() * 3)];
+        } else {
+          // Hard: tries to counter player's pattern
+          if (gameHistory.length > 2) {
+            // Detect if player is repeating a pattern
+            const lastThree = gameHistory.slice(-3).map((game) => game.player);
+            if (lastThree.every((choice) => choice === lastThree[0])) {
+              return getWinningChoice(lastThree[0]);
+            }
+
+            // Try to predict based on recent history
+            if (Math.random() < 0.6) {
+              const lastPlayerChoice =
+                gameHistory[gameHistory.length - 1].player;
+              const winningChoice = getWinningChoice(lastPlayerChoice);
+              return winningChoice;
+            }
+          }
+          return choices[Math.floor(Math.random() * 3)];
+        }
+      }
+
+      function getWinningChoice(choice) {
+        switch (choice) {
+          case "bat":
+            return "stump";
+          case "ball":
+            return "bat";
+          case "stump":
+            return "ball";
+          default:
+            return "bat";
+        }
+      }
+
+      function determineWinner(playerChoice, computerChoice) {
+        let resultMessage = "";
+        let resultClass = "";
+
+        if (playerChoice === computerChoice) {
+          resultMessage = "It's a Draw!";
+          resultClass = "draw";
+          if (soundEnabled) drawSound.play();
+        } else if (
+          (playerChoice === "bat" && computerChoice === "ball") ||
+          (playerChoice === "ball" && computerChoice === "stump") ||
+          (playerChoice === "stump" && computerChoice === "bat")
+        ) {
+          resultMessage = "You Win! 🎉";
+          resultClass = "win";
+          playerScore++;
+          playerWins++;
+          if (soundEnabled) winSound.play();
+        } else {
+          resultMessage = "Computer Wins! 😞";
+          resultClass = "lose";
+          computerScore++;
+          if (soundEnabled) loseSound.play();
+        }
+
+        totalGames++;
+        round++;
+
+        // Update UI
+        const resultElement = document.getElementById("result-message");
+        resultElement.textContent = resultMessage;
+        resultElement.className = "result-message " + resultClass;
+
+        document.getElementById("player-score").textContent = playerScore;
+        document.getElementById("computer-score").textContent = computerScore;
+        document.getElementById("round").textContent = round;
+
+        const winRate =
+          totalGames > 0 ? Math.round((playerWins / totalGames) * 100) : 0;
+        document.getElementById("win-rate").textContent = winRate + "%";
+
+        // Add to history
+        addToHistory(playerChoice, computerChoice, resultMessage);
+      }
+
+      function addToHistory(playerChoice, computerChoice, result) {
+        const historyItem = {
+          round: round - 1,
+          player: playerChoice,
+          computer: computerChoice,
+          result: result,
+        };
+
+        gameHistory.push(historyItem);
+
+        // Update history list (show last 10 games)
+        const historyList = document.getElementById("history-list");
+        const recentHistory = gameHistory.slice(-10);
+
+        historyList.innerHTML = "";
+        recentHistory.forEach((item) => {
+          const historyElement = document.createElement("div");
+          historyElement.className = "history-item";
+          historyElement.innerHTML = `
+                    <span>Round ${item.round}: ${getEmoji(
+            item.player
+          )} vs ${getEmoji(item.computer)}</span>
+                    <span>${item.result}</span>
+                `;
+          historyList.appendChild(historyElement);
+        });
+
+        // Scroll to bottom
+        historyList.scrollTop = historyList.scrollHeight;
+      }
+
+      function getEmoji(choice) {
+        switch (choice) {
+          case "bat":
+            return "🏏";
+          case "ball":
+            return "⚾";
+          case "stump":
+            return "🎯";
+          default:
+            return "-";
+        }
+      }
+
+      function disableChoiceButtons(disabled) {
+        const buttons = document.querySelectorAll(".choice-btn");
+        buttons.forEach((button) => {
+          button.disabled = disabled;
+        });
+      }
+
+      function resetGame() {
+        playerScore = 0;
+        computerScore = 0;
+        round = 1;
+        totalGames = 0;
+        playerWins = 0;
+        gameHistory = [];
+
+        document.getElementById("player-score").textContent = playerScore;
+        document.getElementById("computer-score").textContent = computerScore;
+        document.getElementById("round").textContent = round;
+        document.getElementById("win-rate").textContent = "0%";
+        document.getElementById("player-choice").textContent = "-";
+        document.getElementById("computer-choice").textContent = "-";
+
+        const resultElement = document.getElementById("result-message");
+        resultElement.textContent = "Make your move!";
+        resultElement.className = "result-message";
+
+        document.getElementById("history-list").innerHTML = "";
+      }
+
+      function setDifficulty(level) {
+        difficulty = level;
+
+        // Update active button
+        document.querySelectorAll(".difficulty-btn").forEach((btn) => {
+          btn.classList.remove("active");
+        });
+        event.target.classList.add("active");
+      }
+
+      function toggleSound() {
+        soundEnabled = !soundEnabled;
+        event.target.textContent = soundEnabled
+          ? "Disable Sound"
+          : "Enable Sound";
+      }
+
+      function autoPlay() {
+        const choices = ["bat", "ball", "stump"];
+        let roundsPlayed = 0;
+        const maxRounds = 10;
+
+        const autoPlayInterval = setInterval(() => {
+          if (roundsPlayed >= maxRounds) {
+            clearInterval(autoPlayInterval);
+            return;
+          }
+
+          const randomChoice = choices[Math.floor(Math.random() * 3)];
+          playGame(randomChoice);
+          roundsPlayed++;
+        }, 1000);
+      }
+    </script>
+  </body>   
+</html>

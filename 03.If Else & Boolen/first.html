@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Verification Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 500px;
+            padding: 40px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .container:hover {
+            transform: translateY(-5px);
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+        
+        .age-icon {
+            font-size: 5rem;
+            margin: 20px 0;
+            color: #1a2a6c;
+        }
+        
+        .btn {
+            background: linear-gradient(to right, #1a2a6c, #b21f1f);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn:active {
+            transform: scale(0.98);
+        }
+        
+        .message {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .error {
+            background-color: #ffebee;
+            color: #c62828;
+            border-left: 5px solid #c62828;
+        }
+        
+        .success {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border-left: 5px solid #2e7d32;
+        }
+        
+        .warning {
+            background-color: #fff3e0;
+            color: #ef6c00;
+            border-left: 5px solid #ef6c00;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .footer {
+            margin-top: 30px;
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .age-icon {
+                font-size: 4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Age Verification</h1>
+        <p class="subtitle">Please verify your age to access our content</p>
+        
+        <div class="age-icon">🔞</div>
+        
+        <p>You must be 18 years or older to enter this website.</p>
+        
+        <button class="btn" id="btn" onclick="ageWebsite()">Verify Your Age</button>
+        
+        <div id="msg" class="message"></div>
+        
+        <p class="footer">We respect your privacy and do not store any personal information.</p>
+    </div>
+
+    <script>
+        function ageWebsite() {
+            let age = prompt("Please enter your age:");
+            
+            // Convert string to number
+            age = Number(age);
+            
+            const messageElement = document.querySelector("#msg");
+            const buttonElement = document.querySelector("#btn");
+            
+            // Remove any existing classes
+            messageElement.className = "message";
+            
+            if (!age && age !== 0) {
+                messageElement.innerText = "⚠️ Please enter a valid number!";
+                messageElement.classList.add("warning");
+            } else if (age < 18) {
+                messageElement.innerText = "❌ Sorry, you are under the required age";
+                messageElement.classList.add("error");
+            } else {
+                messageElement.innerText = "✅ Welcome to our website!";
+                messageElement.classList.add("success");
+                buttonElement.style.display = "none"; // Hide button if allowed
+                
+                // Add a small delay before showing the welcome content
+                setTimeout(() => {
+                    document.querySelector(".container").innerHTML = `
+                        <h1>Welcome!</h1>
+                        <div style="font-size: 4rem; margin: 20px 0;">🎉</div>
+                        <p>You have successfully verified your age.</p>
+                        <p>Enjoy your visit to our website!</p>
+                        <div class="footer" style="margin-top: 40px;">
+                            <button class="btn" onclick="location.reload()">Restart Verification</button>
+                        </div>
+                    `;
+                }, 2000);
+            }
+        }
+    </script>
+</body>
+</html>

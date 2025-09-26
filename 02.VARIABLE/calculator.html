@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Calculator (JS functional)</title>
+<style>
+  :root{
+    --bg:#0f1724;
+    --panel:#0b1220;
+    --btn:#1f2937;
+    --accent:#10b981;
+    --text:#e6eef6;
+  }
+  *{box-sizing:border-box;font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial}
+  body{
+    margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(180deg,#071024 0%,#0f1724 100%);
+    color:var(--text);
+  }
+  .calc{
+    width:320px;background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));
+    border-radius:14px;padding:18px;box-shadow:0 10px 30px rgba(2,6,23,0.7);
+  }
+  .display{
+    height:64px;background:linear-gradient(180deg,#081022,#07101b);
+    border-radius:10px;padding:10px 14px;margin-bottom:12px;
+    display:flex;flex-direction:column;justify-content:center;align-items:flex-end;
+    color:var(--text);font-size:20px;letter-spacing:0.6px;
+  }
+  .display .small{font-size:12px;color:rgba(230,238,246,0.5);margin-bottom:6px}
+  .grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:10px;
+  }
+  .btn{
+    background:var(--btn);border-radius:8px;padding:16px 10px;text-align:center;
+    cursor:pointer;user-select:none;color:var(--text);font-weight:600;
+    box-shadow:inset 0 -3px 0 rgba(0,0,0,0.35);
+    transition:transform .07s ease, box-shadow .07s ease;
+  }
+  .btn:active{transform:translateY(2px);box-shadow:inset 0 2px 6px rgba(0,0,0,0.4)}
+  .btn.op{background:linear-gradient(180deg,#0b7a5b,#08764f);color:white}
+  .btn.equal{grid-column:span 2;background:var(--accent);font-weight:700}
+  .btn.zero{grid-column:span 2;text-align:left;padding-left:22px}
+  .muted{color:rgba(230,238,246,0.7);font-weight:600}
+</style>
+</head>
+<body>
+  <div class="calc" role="application" aria-label="Calculator (visual only)">
+    <div class="display" aria-hidden="true">
+      <div class="small">Expression</div>
+      <div id="display" class="big muted"></div>
+    </div>
+
+    <div class="grid" aria-hidden="true">
+      <div onclick="clearDisplay()" class="btn" style="background: #374151;">C</div>
+      <div onclick="backspace()" class="btn" style="background: #374151;">⌫</div>
+      <div onclick="percent()" class="btn op">%</div>
+      <div onclick="divide()" class="btn op">÷</div>
+
+      <div onclick="seven()" class="btn">7</div>
+      <div onclick="eight()" class="btn">8</div>
+      <div onclick="nine()" class="btn">9</div>
+      <div onclick="multiple()" class="btn op">×</div>
+
+      <div onclick="four()" class="btn">4</div>
+      <div onclick="five()" class="btn">5</div>
+      <div onclick="six()" class="btn">6</div>
+      <div onclick="minus()" class="btn op">−</div>
+
+      <div onclick="one()"  class="btn">1</div>
+      <div onclick="two()" class="btn">2</div>
+      <div onclick="three()" class="btn">3</div>
+      <div onclick="plus()" class="btn op">+</div>
+
+      <div class="btn zero" onclick="zero()">0</div>
+      <div onclick="dot()" class="btn">.</div>
+      <div onclick="equal()" class="btn equal">=</div>
+    </div>
+  
+  </div>
+
+  <script>
+    let currentDisplay = '';
+    document.querySelector('#display').innerText = currentDisplay
+
+    function zero(){
+        currentDisplay = currentDisplay + "0";
+         document.querySelector('#display').innerText = currentDisplay;
+    }
+    function one(){
+        currentDisplay = currentDisplay + "1";
+         document.querySelector('#display').innerText = currentDisplay;
+    }
+    function two(){
+        currentDisplay = currentDisplay + "2";
+         document.querySelector('#display').innerText = currentDisplay;
+    }
+    function three(){
+        currentDisplay = currentDisplay + "3";
+         document.querySelector('#display').innerText = currentDisplay;
+    }
+    function four(){
+        currentDisplay = currentDisplay + "4";
+         document.querySelector('#display').innerText = currentDisplay;
+    }
+    function five(){
+        currentDisplay = currentDisplay + "5";
+         document.querySelector('#display').innerText = currentDisplay;
+    }
+    function six(){
+        currentDisplay = currentDisplay + "6";
+         document.querySelector('#display').innerText = currentDisplay;
+    }
+    function seven(){
+        currentDisplay = currentDisplay + "7";
+         document.querySelector('#display').innerText = currentDisplay;
+    }
+    function eight(){
+        currentDisplay = currentDisplay + "8";
+         document.querySelector('#display').innerText = currentDisplay;
+    }
+    function nine(){
+        currentDisplay = currentDisplay + "9";
+         document.querySelector('#display').innerText = currentDisplay;
+    }
+    function dot(){
+        currentDisplay = currentDisplay + ".";
+         document.querySelector('#display').innerText = currentDisplay;
+    }
+    function plus(){
+        currentDisplay = currentDisplay + "+";
+         document.querySelector('#display').innerText = currentDisplay;
+    }
+    function minus(){
+        currentDisplay = currentDisplay + "-";
+         document.querySelector('#display').innerText = currentDisplay;
+    }
+    function divide(){
+        currentDisplay = currentDisplay + "/";
+         document.querySelector('#display').innerText = currentDisplay;
+    }
+    function multiple(){
+        currentDisplay = currentDisplay + "*";
+         document.querySelector('#display').innerText = currentDisplay;
+    }
+    function clearDisplay(){
+          currentDisplay = '';
+         document.querySelector('#display').innerText = currentDisplay;
+    }
+    function equal(){
+         document.querySelector('#display').innerText = eval(currentDisplay);
+    }
+    // Added functions for new buttons
+    function backspace(){
+        currentDisplay = currentDisplay.slice(0, -1);
+        document.querySelector('#display').innerText = currentDisplay;
+    }
+    function percent(){
+        currentDisplay = currentDisplay + "/100";
+        document.querySelector('#display').innerText = eval(currentDisplay);
+        currentDisplay = eval(currentDisplay).toString();
+    }
+  </script>
+</body>
+</html>

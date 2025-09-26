@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cricket Game</title>
+  </head>
+  <body>
+    <h1>Bat Ball Stump Game</h1>
+    <button onclick="bat()">Bat</button>
+    <button onclick="ball()">Ball</button>
+    <button onclick="stump()">Stump</button>
+
+    <script>
+      function bat() {
+        let computerChoice;
+        let randomNumber = Math.random() * 3;
+
+        if (randomNumber > 0 && randomNumber <= 1) {
+          computerChoice = "bat";
+        } else if (randomNumber > 1 && randomNumber <= 2) {
+          computerChoice = "ball";
+        } else if (randomNumber > 2 && randomNumber <= 3) {
+          computerChoice = "stump";
+        }
+       
+
+        let result;
+        if (computerChoice === "ball") {
+          result = "You won"
+        } else if (computerChoice === "stump") {
+          result = "computer wins"
+        } else {
+          result = "Its draw"
+        }
+
+        alert(`Your Choice is bat. Computer choice is ${computerChoice} and ${result} `)
+      }
+      function ball() {
+        let computerChoice;
+        let randomNumber = Math.random() * 3;
+        if (randomNumber > 0 && randomNumber <= 1) {
+          computerChoice = "bat";
+        } else if (randomNumber > 1 && randomNumber <= 2) {
+          computerChoice = "ball";
+        } else if (randomNumber > 2 && randomNumber <= 3) {
+          computerChoice = "stump";
+        }
+
+     
+
+        let result;
+        if (computerChoice === "ball") {
+          result = "its draw"
+        } else if (computerChoice === "stump") {
+          result="You won"
+        } else {
+         result = "computer wins"
+        }
+        alert(`Your Choice is ball. Computer choice is ${computerChoice} and ${result} `)
+      }
+      function stump() {
+        let computerChoice;
+        let randomNumber = Math.random() * 3;
+        if (randomNumber > 0 && randomNumber <= 1) {
+          computerChoice = "bat";
+        } else if (randomNumber > 1 && randomNumber <= 2) {
+          computerChoice = "ball";
+        } else if (randomNumber > 2 && randomNumber <= 3) {
+          computerChoice = "stump";
+        }
+   
+
+        let result;
+        if (computerChoice === "ball") {
+           result = "computer wins"
+        } else if (computerChoice === "stump") {
+           result = "its draw"
+        } else {
+        result="You won"
+        }
+        alert(`Your Choice is stump. Computer choice is ${computerChoice} and ${result} `)
+      }
+    </script>
+  </body>
+</html>
