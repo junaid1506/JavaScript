@@ -20,4 +20,4 @@
 - Variable re difine in scope 
 - var does not follow scope
 - function in reusable code
-  	                                                     
+- return statement end the function immediatly  	                                                     
