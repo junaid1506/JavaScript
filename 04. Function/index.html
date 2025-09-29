@@ -1,21 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <script>
+      let status;
+      function checkAge(MyAge) {
+        let age = MyAge;
 
-        function sum(a,b){
-            return a + b
+        if (age > 18) {
+          status = "You can drive";
+        } else {
+          status = "You cannot drive";
         }
-        console.log(sum(1,2))
+        return status;
+      }
+
+      console.log(checkAge(15));
+      console.log(checkAge(25));
+
+
+    
+
 
 
 
 
     </script>
-</body>
+  </body>
 </html>
