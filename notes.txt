@@ -21,4 +21,5 @@
 - var does not follow scope
 - function in reusable code
 - return statement end the function immediatly 
--  	                                                     
+- Group of multiple value together in key-value pairs is object
+                                                     
