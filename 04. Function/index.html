@@ -48,11 +48,13 @@
       // larger number return 
 
       function largerNum(a = 0,b = 0){
-        if(a > b){
-          return `Your First number is ${a} and second number is ${b} so <b>${a}</b> is larger.`;
-        }else {
-          return `Your First number is ${a} and second number is ${b} so <b>${b}</b> is larger.`;;
-        }
+        // if(a > b){
+        //   return `Your First number is ${a} and second number is ${b} so <b>${a}</b> is larger.`;
+        // }else {
+        //   return `Your First number is ${a} and second number is ${b} so <b>${b}</b> is larger.`;;
+        // }
+
+        return a > b ? a : b
       }
 
       let numOne = Number(prompt("Enter the first num"))
