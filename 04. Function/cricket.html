@@ -12,59 +12,66 @@
     <button onclick="stump()">Stump</button>
 
     <script>
-      let computerChoice;
       function randomGenerator() {
         let randomNumber = Math.random() * 3;
         if (randomNumber > 0 && randomNumber <= 1) {
-          computerChoice = "bat";
+          return "bat";
         } else if (randomNumber > 1 && randomNumber <= 2) {
-          computerChoice = "ball";
+          return "ball";
         } else if (randomNumber > 2 && randomNumber <= 3) {
-          computerChoice = "stump";
+          return "stump";
         }
+      }
+      function getresult(userMove, ComputerMove) {
+        if (userMove === "bat") {
+          if (ComputerMove === "ball") {
+            return "You won";
+          } else if (ComputerMove === "stump") {
+            return "computer wins";
+          } else {
+            return "Its draw";
+          }
+        } else if (userMove === "ball") {
+          if (ComputerMove === "ball") {
+            return "its draw";
+          } else if (ComputerMove === "stump") {
+            return "You won";
+          } else {
+            return "computer wins";
+          }
+        } else {
+          if (ComputerMove === "ball") {
+            return "computer wins";
+          } else if (ComputerMove === "stump") {
+            return "its draw";
+          } else {
+            return "You won";
+          }
+        }
+      }
+
+      function showMsg(userChoice, computerChoice, result) {
+        alert(
+          `Your Choice is ${userChoice}. Computer choice is ${computerChoice} and ${result} `
+        );
       }
 
       function bat() {
-        let result;
-        if (computerChoice === "ball") {
-          result = "You won";
-        } else if (computerChoice === "stump") {
-          result = "computer wins";
-        } else {
-          result = "Its draw";
-        }
+        let computerChoice = randomGenerator();
+        let result = getresult("bat", computerChoice);
 
-        alert(
-          `Your Choice is bat. Computer choice is ${computerChoice} and ${result} `
-        );
+        showMsg('bat', computerChoice, result);
       }
       function ball() {
-        randomGenerator();
-        let result;
-        if (computerChoice === "ball") {
-          result = "its draw";
-        } else if (computerChoice === "stump") {
-          result = "You won";
-        } else {
-          result = "computer wins";
-        }
-        alert(
-          `Your Choice is ball. Computer choice is ${computerChoice} and ${result} `
-        );
+        let computerChoice = randomGenerator();
+        let result = getresult("ball", computerChoice);
+
+        showMsg('ball',computerChoice, result);
       }
       function stump() {
-        randomGenerator();
-        let result;
-        if (computerChoice === "ball") {
-          result = "computer wins";
-        } else if (computerChoice === "stump") {
-          result = "its draw";
-        } else {
-          result = "You won";
-        }
-        alert(
-          `Your Choice is stump. Computer choice is ${computerChoice} and ${result} `
-        );
+        let computerChoice = randomGenerator();
+        let result = getresult("stump", computerChoice);
+        showMsg('stump',computerChoice, result);
       }
     </script>
   </body>
