@@ -8,34 +8,56 @@
   <body>
     <script>
       //   let status;
-      function checkAge(MyAge) {
-        let age = MyAge;
-        //   let status;
-        if (age > 18) {
-          return "You can drive";
-        } else {
-          return "You cannot drive";
+      // function checkAge(MyAge) {
+      //   let age = MyAge;
+      //   //   let status;
+      //   if (age > 18) {
+      //     return "You can drive";
+      //   } else {
+      //     return "You cannot drive";
+      //   }
+      //   // return status;
+      // }
+
+      // console.log(checkAge(15));
+      // console.log(checkAge(25));
+
+
+      // function returnEnd(){
+      //   return "My name is junaid"
+      //   return "I am a ansari"
+      // }
+
+      // console.log(returnEnd())
+
+
+
+      // check if number is odd or even 
+
+      // function numCheck(num){
+      //     if(num % 2 === 0){
+      //       return `The Provide Number is ${num} and it's a even number`
+      //     }else{
+      //       return `The Provide Number is ${num} and it's a odd number`
+      //     }
+      // } 
+      // let userInput = Number(prompt("Enter the number"))
+      // console.log(numCheck(userInput))
+
+
+      // larger number return 
+
+      function largerNum(a,b){
+        if(a > b){
+          return ``;
+        }else {
+          return b;
         }
-        // return status;
       }
 
-      console.log(checkAge(15));
-      console.log(checkAge(25));
-
-
-      function returnEnd(){
-        return "My name is junaid"
-        return "I am a ansari"
-      }
-
-      console.log(returnEnd())
-
-
-
-
-
-
-
+      let numOne = Number(prompt("Enter the first num"))
+      let numTwo = Number(prompt("Enter the second num"))
+      console.log(largerNum(numOne,numTwo))
 
 
 
