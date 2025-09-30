@@ -47,17 +47,17 @@
 
       // larger number return 
 
-      function largerNum(a,b){
+      function largerNum(a = 0,b = 0){
         if(a > b){
-          return ``;
+          return `Your First number is ${a} and second number is ${b} so <b>${a}</b> is larger.`;
         }else {
-          return b;
+          return `Your First number is ${a} and second number is ${b} so <b>${b}</b> is larger.`;;
         }
       }
 
       let numOne = Number(prompt("Enter the first num"))
       let numTwo = Number(prompt("Enter the second num"))
-      console.log(largerNum(numOne,numTwo))
+      document.write(`<h3>${largerNum(numOne,numTwo)}</h3>`)
 
 
 
