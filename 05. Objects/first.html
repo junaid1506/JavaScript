@@ -1,34 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Objects</h1>
     <script>
-        let product = {
-            company: 'Mango',
-            price :861,
-            'item-name':'T-Shirt',
-        };
-        let productPrice = "price"
-        
-        console.log(product['item-name'])
-        console.log(product[productPrice])
-        console.log(product.productPrice)   // Not Working
+      // let product = {
+      //     company: 'Mango',
+      //     price :861,
+      //     'item-name':'T-Shirt',
+      // };
+      // let productPrice = "price"
 
+      // console.log(product['item-name'])
+      // console.log(product[productPrice])
+      // console.log(product.productPrice)   // Not Working
 
-        //  remove 
-        delete product.company
-        console.log(product)  
+      // //  remove
+      // delete product.company
+      // console.log(product)
 
+      let product = {
+        company: "Mango",
+        price: 861,
+        "item-name": "T-Shirt",
+        displayFunction : function(){
+            console.log( `The Price of this T-Shirt is ${this.price}  .`  )
+        }
+      };
 
-
-
-
+    product.displayFunction()
 
     </script>
-</body>
+  </body>
 </html>
