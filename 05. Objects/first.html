@@ -11,9 +11,24 @@
         let product = {
             company: 'Mango',
             price :861,
-            itemName:'T-Shirt',
+            'item-name':'T-Shirt',
         };
+        let productPrice = "price"
         
+        console.log(product['item-name'])
+        console.log(product[productPrice])
+        console.log(product.productPrice)   // Not Working
+
+
+        //  remove 
+        delete product.company
+        console.log(product)  
+
+
+
+
+
+
     </script>
 </body>
 </html>
