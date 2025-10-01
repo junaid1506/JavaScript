@@ -12,6 +12,12 @@
     <button onclick="stump()">Stump</button>
 
     <script>
+
+        let score = {
+            win:0,
+            lose:0,
+            tie:0
+        }
       function randomGenerator() {
         let randomNumber = Math.random() * 3;
         if (randomNumber > 0 && randomNumber <= 1) {
@@ -25,32 +31,42 @@
       function getresult(userMove, ComputerMove) {
         if (userMove === "bat") {
           if (ComputerMove === "ball") {
-            return "You won";
+            score.win++
+            return "You won";          
           } else if (ComputerMove === "stump") {
-            return "computer wins";
+            score.lose++
+            return "computer wins";            
           } else {
+            score.tie++
             return "Its draw";
           }
         } else if (userMove === "ball") {
           if (ComputerMove === "ball") {
+            score.tie++
             return "its draw";
           } else if (ComputerMove === "stump") {
+            score.win++
             return "You won";
           } else {
+            score.lose++
             return "computer wins";
           }
         } else {
           if (ComputerMove === "ball") {
+            score.lose++
             return "computer wins";
           } else if (ComputerMove === "stump") {
+            score.tie++
             return "its draw";
           } else {
+            score.win++
             return "You won";
           }
         }
       }
 
       function showMsg(userChoice, computerChoice, result) {
+        console.log(score)
         alert(
           `Your Choice is ${userChoice}. Computer choice is ${computerChoice} and ${result} `
         );
