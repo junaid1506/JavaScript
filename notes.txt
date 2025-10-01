@@ -26,3 +26,4 @@
 - When function is in object its call Method
 - object can contain Primitive , objects (nested object) , functions
 - When we write function in object its not need to write function name
+- Automactic conversion of Primitive to objects
