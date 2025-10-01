@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cricket Game</title>
+    <title>Cricket Game with the Function and Object</title>
   </head>
   <body>
-    <h1>Bat Ball Stump Game with the Function</h1>
+    <h1>Bat Ball Stump Game </h1>
     <button onclick="bat()">Bat</button>
     <button onclick="ball()">Ball</button>
     <button onclick="stump()">Stump</button>
@@ -66,9 +66,13 @@
       }
 
       function showMsg(userChoice, computerChoice, result) {
-        console.log(score)
+        // console.log(score)
         alert(
-          `Your Choice is ${userChoice}. Computer choice is ${computerChoice} and ${result} `
+          `         Your Choice is ${userChoice}. Computer choice is ${computerChoice} 
+          
+          ${result}
+          
+          Won: ${score.win}, Lost: ${score.lose}, Tie: ${score.tie}`
         );
       }
 
