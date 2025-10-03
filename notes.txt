@@ -32,3 +32,5 @@
 - when comparirng with ==, you re comparirng refrence not contet 
 - chnge to one reference affects all copies 
 - De-structuring : Extract properties from objects 
+- JSON (JavaScript Object Notation): Not the same as JS object, but similar
+- Common use in network call and data storage 
