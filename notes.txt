@@ -34,3 +34,5 @@
 - De-structuring : Extract properties from objects 
 - JSON (JavaScript Object Notation): Not the same as JS object, but similar
 - Common use in network call and data storage 
+- JSON.stringify() => Convert JSON into the string
+- JSON.parse() => Convert string into the JSON
