@@ -27,3 +27,8 @@
 - object can contain Primitive , objects (nested object) , functions
 - When we write function in object its not need to write function name
 - Automactic conversion of Primitive to objects
+- objects work based on reference, not acual data
+- Copying an object copies the reefernce, not the acual object.
+- when comparirng with ==, you re comparirng refrence not contet 
+- chnge to one reference affects all copies 
+- De-structuring : Extract properties from objects 
