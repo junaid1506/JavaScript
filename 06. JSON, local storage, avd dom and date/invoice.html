@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+              :root{
+      --bg:#f6f7fb;
+      --card:#ffffff;
+      --accent:#111827;
+      --muted:#6b7280;
+      --success:#10b981;
+      --danger:#ef4444;
+      --border: #e6e9ef;
+      --shadow: 0 6px 18px rgba(16,24,40,0.06);
+      --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      }
+      *{box-sizing:border-box}
+      body{
+      margin:0;
+      font-family:var(--font-sans);
+      background:var(--bg);
+      color:var(--accent);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:24px;
+      display:flex;
+      justify-content:center;
+      }
+      .invoice-wrap{
+      width:800px;
+      max-width:100%;
+      background:var(--card);
+      border-radius:12px;
+      padding:28px;
+      box-shadow:var(--shadow);
+      border:1px solid var(--border);
+      }
+
+
+      header{
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+      align-items:start;
+      }
+      .seller{
+      line-height:1.35;
+      }
+      .seller h2{margin:0 0 6px 0;font-size:18px}
+      .meta{
+      text-align:right;
+      font-size:14px;
+      color:var(--muted);
+      }
+      .meta .inv-no{font-weight:600;color:var(--accent)}
+
+
+      .addresses{
+      display:flex;
+      gap:24px;
+      margin-top:20px;
+      flex-wrap:wrap;
+      }
+      .address-box{
+      flex:1 1 300px;
+      background:transparent;
+      padding:12px 0;
+      }
+      .address-box h4{margin:0 0 6px 0;font-size:13px}
+      .address-box p{margin:0;color:var(--muted);font-size:14px}
+
+
+      table.invoice{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:20px;
+      font-size:14px;
+      }
+      table.invoice thead th{
+      text-align:left;
+      padding:12px 10px;
+      background:transparent;
+      color:var(--muted);
+      font-weight:600;
+      border-bottom:2px solid var(--border);
+      }
+      }
+    </style>
+  </head>
+  <body>
+
+    <button id="btn" onclick="details()">Generate Your Invoice</button>
+    <div id="myInvoice"></div>
+
+    <script>
+      let myContainer = document.querySelector("#myInvoice");
+      let myBtn = document.querySelector('#btn')
+      function details(){
+      let name = prompt("Enter Your Name");
+      let address = prompt("Enter Your Adress");
+      let phone = prompt("Enter Your Phone No.");
+      myBtn.style.display = "none";
+      
+      function invoiceGenerater() {
+        myContainer.innerHTML = `
+    
+           <div class="invoice-wrap">
+
+           
+           <header>
+           <div class="seller">
+           <h2>TeeZone Clothing</h2>
+           <div class="muted">123 Fashion Street, Mumbai, India</div>
+           <div class="muted">Phone: +91 98765 43210</div>
+           <div class="muted">Email: support@teezone.in</div>
+           </div>
+           <div class="meta">
+           <div>Invoice No: <span class="inv-no">TZ-00123</span></div>
+           <div>Date: <strong>03 Oct 2025</strong></div>
+           <div style="margin-top:8px">
+           Status: <span class="status paid">Paid ✅</span>
+           </div>
+           </div>
+           </header>
+           
+           
+           <section class="addresses">
+           <div class="address-box">
+           <h4>Buyer</h4>
+           <p>${name}</p>
+           <p>${address}</p>
+           <p>${phone}</p>
+           </div>
+           
+           
+           <div class="address-box" style="text-align:right">
+           <h4>Payment Method</h4>
+           <p>Cash / UPI / Card</p>
+           </div>
+           </section>
+           
+           
+           <table class="invoice" aria-labelledby="invoice-items">
+           <thead>
+           <tr>
+           <th>Item</th>
+           <th>Description</th>
+           <th class="right">Quantity</th>
+           <th class="right">Unit Price (₹)</th>
+           <th class="right">Total (₹)</th>
+           </tr>
+           </thead>
+           <tbody>
+           <tr>
+           <td>T-Shirt</td>
+           <td>Cotton Round Neck (Black, Size M)</td>
+           <td class="right">2</td>
+           <td class="right">499.00</td>
+           <td class="right">998.00</td>
+           </tr>
+           </tbody>
+           </table>
+           
+           
+           <div class="totals">
+           <div class="box">
+           <div class="row"><div class="muted">Subtotal</div><div>₹998.00</div></div>
+           </div>
+    
+           
+           <button onclick="window.location.reload();">Go Back </button>
+
+    
+    `;
+      }
+
+      
+      invoiceGenerater()     
+
+
+
+
+
+
+
+
+
+
+
+
+
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+  </body>
+</html>
