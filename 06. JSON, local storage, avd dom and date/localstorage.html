@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+        
+     let  product1 = {
+          company: 'Mango',
+          price :861,
+          name:'T-Shirt',
+      };
+
+
+      localStorage.setItem("Name" , "Junaid")
+      console.log(localStorage.getItem('Name'))
+
+
+      if(localStorage.getItem('Name') === 'Junaid'){
+        console.log(true)
+      }
+      else{
+        console.log(false)
+      }
+      
+      localStorage.setItem('product' , JSON.stringify(product1))
+      console.log(JSON.parse(localStorage.getItem('product')))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script> 
+</body>
+</html>
