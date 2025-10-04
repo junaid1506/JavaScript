@@ -36,3 +36,9 @@
 - Common use in network call and data storage 
 - JSON.stringify() => Convert JSON into the string
 - JSON.parse() => Convert string into the JSON
+- Persistent data storage in the browser.
+- setItem: Stores data as key-value pairs.
+- only string can be stored.
+- getItem: Retrives data based on key.
+- Other Methods: localStorage.clear(), removeItem().
+- Do not share sensitive information, ViewAble in storage console
