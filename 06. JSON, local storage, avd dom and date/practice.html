@@ -10,11 +10,12 @@
 
     <script>
      let number = document.querySelector('#num')
-     let getNum = localStorage.getItem(Number(num))
+     let getNum = localStorage.getItem('num')
      let FinalNum;
-     FinalNum = getNum ? number.innerText= localStorage.getItem(Number(num)) :  number.innerText= 0
+     FinalNum = getNum ? number.innerText= getNum : number.innerText= 0
      function myFun(){
       FinalNum =   Number(FinalNum) + 1;
+      number.innerText = FinalNum
       localStorage.setItem( "num" ,  FinalNum)
      }
 
