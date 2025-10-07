@@ -15,34 +15,31 @@
     </style>
 </head>
 <body>
+   
     <button onclick="myFun()" id="num">0</button>
     <script>
+         
      let number = document.querySelector('#num')
      let getNum = localStorage.getItem('num')
      let FinalNum;
      FinalNum = getNum ? number.innerText= getNum : number.innerText= 0
      function myFun(){
+        color()
       FinalNum =   Number(FinalNum) + 1;
       number.innerText = FinalNum
       localStorage.setItem( "num" ,  FinalNum)
-
-      if(FinalNum % 2 === 0 ){
+      color()
+     }
+     color()
+    function color(){
+         if(FinalNum % 2 === 0 ){
         number.className = '';
         number.classList.add('even') 
       }else{
         number.className = '';
         number.classList.add('odd') 
-      }  
-
-
-
-
-
-
-
-
-
-     }
+      } 
+    } 
     </script>
 </body>
 </html>
