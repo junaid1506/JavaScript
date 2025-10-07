@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+    
+        .odd{
+            background-color: red;
+        }
+        .even{
+             background-color: green;
+        }
+    </style>
 </head>
 <body>
     <button onclick="myFun()" id="num">0</button>
@@ -16,6 +25,23 @@
       FinalNum =   Number(FinalNum) + 1;
       number.innerText = FinalNum
       localStorage.setItem( "num" ,  FinalNum)
+
+      if(FinalNum % 2 === 0 ){
+        number.className = '';
+        number.classList.add('even') 
+      }else{
+        number.className = '';
+        number.classList.add('odd') 
+      }  
+
+
+
+
+
+
+
+
+
      }
     </script>
 </body>
