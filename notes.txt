@@ -45,3 +45,5 @@
 - Array is just a list of value
 - Index start with  0
 - Array are used for storing multiple calue in a sognle variable
+- Common Methods :- push/pop, shift/unshift, splice, toString, sort, valueOf
+- 
