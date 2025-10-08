@@ -52,6 +52,7 @@
       <!-- cards inserted here by JS -->
     </div>
     <button onclick="dlt()">Delte latest product</button>
+    <button onclick="addNew()">Add new project</button>
   </main>
   
   <script>
@@ -123,6 +124,9 @@
   function  dlt(){
         products.pop()
         renderProducts(products);
+    }
+    function addNew(){
+      form.style.display='block'
     }
 
     // initial render
