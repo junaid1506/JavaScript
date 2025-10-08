@@ -42,3 +42,6 @@
 - getItem: Retrives data based on key.
 - Other Methods: localStorage.clear(), removeItem().
 - Do not share sensitive information, ViewAble in storage console
+- Array is just a list of value
+- Index start with  0
+- Array are used for storing multiple calue in a sognle variable
