@@ -52,3 +52,4 @@
 -- loops : repeated execution of code
 - loops automate repetitive
 - type of loops: for , while , do-while
+- iteration: Number of times loops work
