@@ -12,6 +12,10 @@
         .even{
              background-color: green;
         }
+        #num{
+          border: none;
+          color: white;
+        }
     </style>
 </head>
 <body>
@@ -32,11 +36,11 @@
      }
      color()
     function color(){
-         if(FinalNum % 2 === 0 ){
-        number.className = '';
+         if(FinalNum % 2 === 0){
+        number.classList.remove('odd');
         number.classList.add('even') 
       }else{
-        number.className = '';
+        number.classList.remove('even');
         number.classList.add('odd') 
       } 
     } 
