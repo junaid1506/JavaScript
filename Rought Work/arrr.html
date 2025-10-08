@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Static Product Grid</title>
+  <style>
+    :root{
+      --bg:#f5f6f8; --card:#ffffff; --accent:#111827; --muted:#6b7280;
+    }
+    *{box-sizing:border-box}
+    body{font-family:Inter, system-ui, Arial, sans-serif; margin:0; background:var(--bg); color:var(--accent);}
+
+    header{padding:20px 24px; display:flex; justify-content:space-between; align-items:center; background:linear-gradient(180deg,#fff0 0,#fff0 60%);}
+    header h1{margin:0; font-size:18px}
+
+    .container{max-width:1100px; margin:28px auto; padding:0 16px}
+
+    /* grid */
+    .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:18px}
+
+    /* product card */
+    .card{background:var(--card); border-radius:12px; box-shadow:0 6px 18px rgba(15,23,42,0.06); overflow:hidden; display:flex; flex-direction:column}
+    .media{height:160px; display:flex; align-items:center; justify-content:center; background:linear-gradient(180deg,#eef2ff,#fff);}
+    .media img{max-width:100%; max-height:100%; object-fit:contain}
+    .body{padding:14px 12px; flex:1; display:flex; flex-direction:column}
+    .title-row{display:flex; align-items:center; justify-content:space-between; gap:8px}
+    .title{font-weight:600; font-size:15px}
+    .price{font-weight:700}
+    .desc{font-size:13px; color:var(--muted); margin-top:8px; flex:1}
+
+    .actions{display:flex; gap:8px; margin-top:12px}
+    button{cursor:pointer; border:0; padding:10px 12px; border-radius:8px; font-weight:600}
+    .btn-primary{background:#111827; color:white; flex:1}
+    .btn-ghost{background:transparent; border:1px solid #e5e7eb; color:var(--accent)}
+
+    /* small info row */
+    .meta{display:flex; gap:10px; font-size:12px; color:var(--muted); margin-top:10px}
+
+    /* responsive tweaks */
+    @media (max-width:420px){ .media{height:120px} }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Product Grid — Static Page (Array → Cards)</h1>
+    <div style="font-size:13px;color:var(--muted)">Products: <span id="count">0</span></div>
+  </header>
+
+  <main class="container">
+    <div class="grid" id="productGrid">
+      <!-- cards inserted here by JS -->
+    </div>
+    <button onclick="dlt()">Delte latest product</button>
+  </main>
+  
+  <script>
+    // sample array of objects (products)
+    const products = [
+      { id:1, name:'new Leather Wallet', price:899, desc:'Slim bi-fold wallet made from genuine leather.', img:'https://via.placeholder.com/320x240?text=Wallet' },
+      { id:2, name:'Noise-Canceling Earbuds', price:2499, desc:'Wireless earbuds with active noise cancellation.', img:'https://via.placeholder.com/320x240?text=Earbuds' },
+      { id:3, name:'Ceramic Mug — Ocean', price:349, desc:'Hand-glazed ceramic mug, 350ml capacity.', img:'https://via.placeholder.com/320x240?text=Mug' },
+      { id:4, name:'Notebook — Dot Grid', price:199, desc:'A5 dot-grid notebook with 120 pages.', img:'https://via.placeholder.com/320x240?text=Notebook' },
+      { id:5, name:'Desk Plant — Succulent', price:499, desc:'Low-maintenance succulent in a ceramic pot.', img:'https://via.placeholder.com/320x240?text=Succulent' },
+      { id:6, name:'Minimalist Watch', price:5499, desc:'Thin-profile analogue watch with leather strap.', img:'https://via.placeholder.com/320x240?text=Watch' }
+    ];
+
+    // render function: create DOM nodes from objects
+    function renderProducts(list){
+      const grid = document.getElementById('productGrid');
+      grid.innerHTML = ''; // clear
+
+      list.forEach(p => {
+        const card = document.createElement('article');
+        card.className = 'card';
+
+        card.innerHTML = `
+          <div class="media"><img src="${p.img}" alt="${escapeHtml(p.name)}"></div>
+          <div class="body">
+            <div class="title-row">
+              <div class="title">${escapeHtml(p.name)}</div>
+              <div class="price">₹${numberWithCommas(p.price)}</div>
+            </div>
+            <div class="desc">${escapeHtml(p.desc)}</div>
+            <div class="meta">
+              <div>SKU: #${p.id.toString().padStart(4,'0')}</div>
+              <div>Free shipping over ₹1000</div>
+            </div>
+            <div class="actions">
+              <button class="btn-primary" onclick="addToCart(${p.id})">Add to cart</button>
+              <button class="btn-ghost" onclick="viewDetails(${p.id})">Details</button>
+            </div>
+          </div>
+        `;
+
+        grid.appendChild(card);
+      });
+
+      document.getElementById('count').innerText = list.length;
+    }
+
+    // helpers
+    function escapeHtml(s){ return String(s)
+      .replaceAll('&','&amp;')
+      .replaceAll('<','&lt;')
+      .replaceAll('>','&gt;')
+      .replaceAll('"','&quot;')
+      .replaceAll("'","&#39;");
+    }
+    function numberWithCommas(x){ return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g,","); }
+
+    // actions
+    function addToCart(id){
+      const item = products.find(p=>p.id===id);
+      console.log('Added to cart:', item);
+      alert(`Added "${item.name}" to cart.`);
+    }
+    function viewDetails(id){
+      const item = products.find(p=>p.id===id);
+      alert(item.name + "\n\n" + item.desc + "\nPrice: ₹" + item.price);
+    }
+
+  function  dlt(){
+        products.pop()
+        renderProducts(products);
+    }
+
+    // initial render
+    renderProducts(products);
+    products.push( { id:7, name:'Junaid Ansari', price:5000, desc:'Thin-profile analogue watch with leather strap.', img:'https://via.placeholder.com/320x240?text=Watch' })
+    renderProducts(products);
+  </script>
+</body>
+</html>
