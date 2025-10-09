@@ -26,15 +26,36 @@
         //     }
         // }
 
-        // myFun([5,6,7,9,9], 3)
+        // myFun([5,6,7,9,9], 15)
 
 
-        //3. Create a copy with slice method
+        // 3. Create a copy with slice method
         // let arr1 = [5,6,7,9,9];
         // let arr2 = arr1.slice()
         // console.log(arr2)
 
         // // Create a while loop that exsist after counting 5 prime numbers
+      function isPrime(num){
+        for(let i = 2;  i < num; i++){
+            if(num % i === 0){
+            return   false
+            }
+            return true;
+
+        }
+       }
+        let num2 = 2
+        let i = 0
+
+        while(i < 5){
+            if(isPrime(num2)){
+                console.log(num2)
+                i++;
+            }
+            num2++;
+        }
+       
+       
         // let i = 0;
         // while(i<=50){
         //     if(i % 2 === 1){
@@ -63,11 +84,11 @@
         // }
         // console.log(sen)
 
-        let arr5 = [1,2,3,4,5,6,7,8,9]
+        // let arr5 = [1,2,3,4,5,6,7,8,9]
 
-        for(let i = arr5.length - 1; i >= 0; i--){
-            console.log(arr5[i])
-        }
+        // for(let i = arr5.length - 1; i >= 0; i--){
+        //     console.log(arr5[i])
+        // }
 
 
 
