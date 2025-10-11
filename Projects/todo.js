@@ -13,11 +13,18 @@ function addTodo(){
 
 
 function displayTodo(){
-  let todos = document.querySelector('#todos')
-
-   for (let i = 0; i < todoList.length; i++) {
-       console.log(todoList[i])  
-      todos.innerText = todos.innerText +  `${todoList[i]}`                                                                     
+    let todos = document.querySelector('#todos');
+    let newHtml = '';
+    for (let i = 0; i < todoList.length; i++) {
+        newHtml += `
+        <div>
+          <span>${todoList[i]}</span>
+          <button>Delete</button>
+        </div>  
+      `; 
     }
-
+    console.log(newHtml)
+   todos.innerHTML = newHtml;
 }
+
+
