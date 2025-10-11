@@ -32,9 +32,11 @@ function displayTodo() {
   let todos = document.querySelector("#todos");
   let newHtml = "";
   for (let i = 0; i < todoList.length; i++) {
+    let {item,todoDate} = todoList[i];
     newHtml += `
         <div>
-          <span>${todoList[i]}</span>
+          <span>${item}</span>
+          <span>${todoDate}</span>
           <button onclick="todoList.splice(${i}, 1) 
           displayTodo()">Delete</button>
         </div>  
