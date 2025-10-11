@@ -45,3 +45,4 @@ function displayTodo() {
   console.log(newHtml);
   todos.innerHTML = newHtml;
 }
+                                                                          

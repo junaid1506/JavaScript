@@ -53,3 +53,5 @@
 - loops automate repetitive
 - type of loops: for , while , do-while
 - iteration: Number of times loops work
+- Function in JavaScript are Firts-Class-Citizen; they can be assigned to variable
+- Function Defined without a name, often assigned yo a variable 
