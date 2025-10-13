@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+      .form-container {
+        background: white;
+        padding: 25px 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        width: 350px;
+        display: none;
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        color: #555;
+        font-weight: 500;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 14px;
+        outline: none;
+        transition: 0.3s;
+      }
+
+      input:focus,
+      textarea:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+      }
+
+      .btn {
+        width: 100%;
+        padding: 10px;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 15px;
+        transition: background 0.3s;
+      }
+
+      .btn:hover {
+        background: #0056b3;
+      }
+    </style>
+</head>
+<body>
+    <button id="myBtn">Open form </button>
+
+
+     <div class="form-container">
+      <h2>Product Entry Form</h2>
+
+      <form id="productForm">
+        <div class="form-group">
+          <label for="productName">Product Name</label>
+          <input
+            type="text"
+            id="productName"
+            placeholder="Enter product name"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="productPrice">Price (₹)</label>
+          <input
+            type="number"
+            id="productPrice"
+            placeholder="Enter price"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="productDesc">Description</label>
+          <textarea
+            id="productDesc"
+            rows="4"
+            placeholder="Enter product description"
+            required
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="productImg">Image URL</label>
+          <input
+            type="url"
+            id="productImg"
+            placeholder="Paste image URL"
+            required
+          />
+        </div>
+        <button type="submit" class="btn" onclick="addProductBtn()">
+          Submit
+        </button>
+      </form>
+    </div>
+
+    <script>
+        let btn = document.querySelector('#myBtn')
+        let form = document.querySelector('.form-container')
+        btn.addEventListener('mouseover', e=>{
+            form.style.display = 'block';
+        })
+        btn.addEventListener('mouseout', e=>{
+            form.style.display = 'none';
+        })
+
+
+
+
+
+
+        // let newDate = e => console.log(new Date())
+        // btn.addEventListener('click', newDate)
+
+        // btn.removeEventListener('click' , newDate)
+
+
+
+
+
+
+
+        
+    </script>
+</body>
+</html>
