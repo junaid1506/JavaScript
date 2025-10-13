@@ -7,5 +7,32 @@
 </head>
 <body>
     
+
+
+
+
+    <script>
+        // setTimeOut
+        // let timerId =   setTimeout(()=>{
+        //     console.log("Subah ho gyi uth jao please")
+        // }, 10000)
+
+        // console.log("Alarm is set : " + timerId)
+        // clearTimeout(timerId)
+
+        // setInterval 
+
+      let intervalID =   setInterval(()=>{
+            console.log("Subah ho gyi uth jao please" + new Date())
+        }, 2000)
+
+        setTimeout(()=>{
+            clearInterval(intervalID)
+        }, 10000)
+
+
+
+
+    </script>
 </body>
 </html>
