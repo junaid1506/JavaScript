@@ -7,5 +7,38 @@
 </head>
 <body>
     
+
+    <script>
+        let foods = ['rice', 'bread', 'meat', 'pizza']
+
+        for (let food = 0; food < foods.length; food++) {
+            console.log(foods[food])
+            
+        }
+        console.log('///Time to for Each///')
+        foods.forEach((food)=>{
+            console.log(food)
+        })
+
+
+        function search(arr,value){
+        for (let food = 0; food < foods.length; food++) {
+            if(arr[food] === value){
+                console.log(`${value} found at ${food} index`)
+                return
+            }   
+        }
+
+        console.log('element was not found')
+        }
+
+        search(foods,'milk')
+
+
+
+
+
+
+    </script>
 </body>
 </html>
