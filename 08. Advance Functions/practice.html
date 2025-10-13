@@ -19,26 +19,23 @@
         // console.log(mul(2,8))
         // // Q2 
 
-        // let twice = ()
+         let greeting = ()=>console.log('Assalamualaikum')
+         let twice = newFunct =>{
+            newFunct()
+            newFunct()
+         }
+         twice(greeting)
 
         //Q3 
-        let btn = document.querySelector('#myBtn')
-
-        // setTimeout(()=>{
-        //     btn.addEventListener('click',()=>{
-        //         btn.style.padding = '5px'
-        //         console.log('new')
-        //     })
-        // }, 1000)
-        
-        // btn.addEventListener('click',()=>{
-        //     setTimeout(() => {
-        //         console.log("clicked")
-        //         btn.innerText = "💥"
-        //         btn.style.padding = '50px'
-        //     }, 3000);
-        //     btn.innerText = "Ab ye fatega"
-        // })
+        let btn = document.querySelector('#myBtn')  
+        btn.addEventListener('click',()=>{
+            setTimeout(() => {
+                console.log("clicked")
+                btn.innerText = "💥"
+                btn.style.padding = '50px'
+            }, 3000);
+            btn.innerText = "Ab ye fatega"
+        })
 
         // Q4 
         
@@ -51,12 +48,12 @@
 
         
         //Q5
-        let arr = [1,2,3,4,5,6,7,8,9]
+        // let arr = [1,2,3,4,5,6,7,8,9]
         // let squareNum = arr.map(num => num * num)
-        // let squareNum = arr.forEach((num)=>{
-        //      num * num
-        // }) /// not working cz for each not support return and not give the new array 
-        console.log(squareNum)
+        // // let squareNum = arr.forEach((num)=>{
+        // //      num * num
+        // // }) /// not working cz for each not support return and not give the new array 
+        // console.log(squareNum)
 
 
 
