@@ -1,6 +1,9 @@
-let bagItem = [];
-onLoad()
+let bagItem;
+
+onLoad();
 function onLoad() {
+  let isBegItem = localStorage.getItem("bagItem");
+  bagItem = isBegItem ? JSON.parse(isBegItem) : [];
   displayItemsOnHomePage();
   displayBegCount();
 }
@@ -8,6 +11,7 @@ function onLoad() {
 function addToBeg(itemId) {
   bagItem.push(itemId);
   displayBegCount();
+  localStorage.setItem("bagItem", JSON.stringify(bagItem));
 }
 function displayBegCount() {
   let count = document.querySelector(".bag-item-count");
