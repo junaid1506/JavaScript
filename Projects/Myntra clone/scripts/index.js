@@ -1,14 +1,22 @@
 let bagItem = [];
-displayItemsOnHomePage();
+onLoad()
+function onLoad() {
+  displayItemsOnHomePage();
+  displayBegCount();
+}
 
 function addToBeg(itemId) {
   bagItem.push(itemId);
-  displayBegCount()
+  displayBegCount();
 }
 function displayBegCount() {
   let count = document.querySelector(".bag-item-count");
   count.innerText = bagItem.length;
-  
+  if (bagItem.length > 0) {
+    count.style.display = "flex";
+  } else {
+    count.style.display = "none";
+  }
 }
 
 function displayItemsOnHomePage() {
