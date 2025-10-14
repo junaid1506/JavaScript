@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cricket Game</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-top: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-weight: 600;
+            font-size: 28px;
+        }
+        
+        .game-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .game-btn {
+            padding: 12px 24px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .game-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .game-btn:active {
+            transform: translateY(0);
+        }
+        
+        #reloadBtn {
+            background-color: #7f8c8d;
+        }
+        
+        #reloadBtn:hover {
+            background-color: #636e72;
+        }
+        
+        .results {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .result-item {
+            margin-bottom: 15px;
+            padding: 12px;
+            border-radius: 6px;
+            background-color: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+        
+        .result-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        #result {
+            font-weight: 600;
+            font-size: 18px;
+            text-align: center;
+            padding: 15px;
+        }
+        
+        .win {
+            color: #27ae60;
+            background-color: rgba(39, 174, 96, 0.1);
+        }
+        
+        .lose {
+            color: #e74c3c;
+            background-color: rgba(231, 76, 60, 0.1);
+        }
+        
+        .tie {
+            color: #f39c12;
+            background-color: rgba(243, 156, 18, 0.1);
+        }
+        
+        #score {
+            font-weight: 600;
+            text-align: center;
+            font-size: 18px;
+            color: #2c3e50;
+        }
+        
+        .instructions {
+            margin-top: 25px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #555;
+        }
+        
+        .instructions h3 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .instructions ul {
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 5px;
+        }
+        
+        @media (max-width: 500px) {
+            .game-controls {
+                flex-direction: column;
+            }
+            
+            .game-btn {
+                width: 100%;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cricket Game</h1>
+        
+        <div class="game-controls">
+            <button class="game-btn" onclick="bat()">Bat</button>
+            <button class="game-btn" onclick="ball()">Ball</button>
+            <button class="game-btn" onclick="stump()">Stump</button>
+            <button class="game-btn" id="reloadBtn" onclick="reload()">Reset Score</button>
+        </div>
+        
+        <div class="results">
+            <div class="result-item" id="userMove"></div>
+            <div class="result-item" id="ComputerMove"></div>
+            <div class="result-item" id="result"></div>
+            <div class="result-item" id="score"></div>
+        </div>
+        
+        <div class="instructions">
+            <h3>How to Play</h3>
+            <ul>
+                <li>Select Bat, Ball, or Stump to play against the computer</li>
+                <li>Bat beats Ball</li>
+                <li>Ball beats Stump</li>
+                <li>Stump beats Bat</li>
+                <li>Same selections result in a tie</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function reload(){
+            localStorage.clear()
+            resetScore()
+            showMsg()
+        }
+        
+        let myScore = localStorage.getItem("score");
+        let score;
+        resetScore(myScore)
+        
+        function resetScore(myScore) {
+            score = myScore ? JSON.parse(myScore) : {
+                win: 0,
+                lose: 0,
+                tie: 0,
+            };
+            score.displayScore = function () {
+                return `Score: Won ${score.win}, Lost ${score.lose}, Tied ${score.tie}`;
+            };
+        }
+
+        function randomGenerator() {
+            let randomNumber = Math.random() * 3;
+            if (randomNumber > 0 && randomNumber <= 1) {
+                return "bat";
+            } else if (randomNumber > 1 && randomNumber <= 2) {
+                return "ball";
+            } else if (randomNumber > 2 && randomNumber <= 3) {
+                return "stump";
+            }
+        }
+        
+        function getresult(userMove, ComputerMove) {
+            if (userMove === "bat") {
+                if (ComputerMove === "ball") {
+                    score.win++;
+                    return "You won!";
+                } else if (ComputerMove === "stump") {
+                    score.lose++;
+                    return "Computer wins!";
+                } else {
+                    score.tie++;
+                    return "It's a draw!";
+                }
+            } else if (userMove === "ball") {
+                if (ComputerMove === "ball") {
+                    score.tie++;
+                    return "It's a draw!";
+                } else if (ComputerMove === "stump") {
+                    score.win++;
+                    return "You won!";
+                } else {
+                    score.lose++;
+                    return "Computer wins!";
+                }
+            } else {
+                if (ComputerMove === "ball") {
+                    score.lose++;
+                    return "Computer wins!";
+                } else if (ComputerMove === "stump") {
+                    score.tie++;
+                    return "It's a draw!";
+                } else {
+                    score.win++;
+                    return "You won!";
+                }
+            }
+        }
+
+        function showMsg(userChoice, computerChoice, result) {
+            localStorage.setItem("score", JSON.stringify(score));
+
+            document.querySelector('#userMove').innerText = 
+                userChoice ? `You selected: ${userChoice.charAt(0).toUpperCase() + userChoice.slice(1)}` : '';
+            
+            document.querySelector('#ComputerMove').innerText = 
+                computerChoice ? `Computer selected: ${computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1)}` : '';
+            
+            document.querySelector('#result').innerText =
+                result ? `${result}` : '';
+            
+            document.querySelector('#score').innerText =
+                `${score.displayScore()}`;
+                
+            // Add visual feedback based on result
+            const resultElement = document.querySelector('#result');
+            if (result) {
+                if (result.includes("You won")) {
+                    resultElement.className = "result-item win";
+                } else if (result.includes("Computer wins")) {
+                    resultElement.className = "result-item lose";
+                } else {
+                    resultElement.className = "result-item tie";
+                }
+            }
+        }
+
+        function bat() {
+            let computerChoice = randomGenerator();
+            let result = getresult("bat", computerChoice);
+            showMsg("bat", computerChoice, result);
+        }
+        
+        function ball() {
+            let computerChoice = randomGenerator();
+            let result = getresult("ball", computerChoice);
+            showMsg("ball", computerChoice, result);
+        }
+        
+        function stump() {
+            let computerChoice = randomGenerator();
+            let result = getresult("stump", computerChoice);
+            showMsg("stump", computerChoice, result);
+        }
+        
+        // Initialize the display
+        showMsg();
+    </script>
+</body>
+</html>
