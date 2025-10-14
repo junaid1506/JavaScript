@@ -1,4 +1,26 @@
-let itemsContainerElement = document.querySelector(".items-container");
+let bagItem = []  
+displayItemsOnHomePage()
+  
+
+function addToBeg(itemId){
+    let count = document.querySelector('.bag-item-count')
+    bagItem.push(itemId);
+    count.innerText = bagItem.length
+
+}
+
+
+
+
+
+
+
+
+
+
+
+function displayItemsOnHomePage(){
+    let itemsContainerElement = document.querySelector(".items-container");
 let innerHTML = '';
 
 items.forEach((item)=>{
@@ -16,12 +38,15 @@ items.forEach((item)=>{
                     <span class="orignal-price">Rs ${item.original_price} </span>
                     <span class="discount-price">(${item. discount_percentage}% OFF)</span>
                 </div>
-                <button class="btn-add-bag">Add To Bag</button>
+                <button class="btn-add-bag" onclick="addToBeg(${item.id})">Add To Bag</button>
             </div>
   `;
 })
 
  itemsContainerElement.innerHTML = innerHTML
+}
 
 
- 
+
+
+
