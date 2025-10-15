@@ -1,10 +1,642 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Myntra Functional Clone</title>
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Assistant,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #282c3f;
+            line-height: 1.4;
+            padding-top: 80px; /* To compensate for fixed header */
+        }
+
+        /* Header Styles */
+        header {
+            display: flex;
+            background-color: #ffffff;
+            height: 80px;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eaeaec;
+            box-shadow: 0 1px 2px 0 rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .logo_container {
+            margin-left: 4%;
+        }
+
+        .myntra_home {
+            height: 36px;
+            cursor: pointer;
+        }
+
+        .nav_bar {
+            display: flex;
+            min-width: 500px;
+            justify-content: space-evenly;
+        }
+
+        .nav_bar a {
+            font-size: 14px;
+            letter-spacing: .3px;
+            color: #282c3f;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 28px 0;
+            border-bottom: 4px solid #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .nav_bar a:hover {
+            border-bottom: 4px solid #f54e77;
+        }
+
+        .nav_bar a sup {
+            color: #ff3f6c;
+            font-size: 10px;
+        }
+
+        .search_bar {
+            height: 40px;
+            min-width: 400px;
+            width: 40%;
+            display: flex;
+            align-items: center;
+        }
+
+        .search_icon {
+            box-sizing: content-box;
+            height: 20px;
+            padding: 10px;
+            background-color: #f5f5f6;
+            color: #282c3f;
+            font-weight: 300;
+            border-radius: 4px 0 0 4px;
+        }
+
+        .search_input {
+            color: #696e79;
+            background-color: #f5f5f6;
+            flex-grow: 1;
+            height: 40px;
+            border: 0;
+            border-radius: 0 4px 4px 0;
+            padding: 0 16px;
+            font-size: 14px;
+        }
+
+        .search_input:focus {
+            outline: none;
+            background-color: #ffffff;
+            box-shadow: 0 0 0 2px #ff3f6c;
+        }
+
+        .action_bar {
+            display: flex;
+            min-width: 250px;
+            justify-content: space-evenly;
+            gap: 15px;
+            margin-right: 4%;
+        }
+
+        .action_container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #282c3f;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 8px 12px;
+            position: relative;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .action_container:hover {
+            background-color: #f5f5f6;
+        }
+
+        .action_icon {
+            font-size: 20px;
+            margin-bottom: 2px;
+            color: #282c3f;
+        }
+
+        .action_name {
+            font-size: 12px;
+            font-weight: 700;
+            color: #282c3f;
+        }
+
+        .bag-item-count {
+            position: absolute;
+            top: 5px;
+            right: 8px;
+            background-color: #ff3f6c;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        /* Main Banner */
+        .main_banner {
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .banner_image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Category Section */
+        .category_section {
+            margin: 40px 4%;
+        }
+
+        .section_heading {
+            font-size: 28px;
+            font-weight: 700;
+            color: #3e4152;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .category_grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 20px;
+        }
+
+        .category_card {
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .category_card:hover {
+            transform: translateY(-5px);
+        }
+
+.category_image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    object-position: top; /* 👈 ye important hai */
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+
+        .category_name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #3e4152;
+        }
+
+        /* Deal Section */
+       .banner_section {
+    width: 100%;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.banner_img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .banner_section {
+        padding: 15px;
+        margin: 15px 0;
+    }
+    
+    .banner_img {
+        height: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .banner_section {
+        padding: 10px;
+        margin: 10px 0;
+    }
+    
+    .banner_img {
+        height: 150px;
+        border-radius: 4px;
+    }
+}
+
+        /* Brand Section */
+        .brand_section {
+            margin: 50px 4%;
+        }
+
+        .brand_grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .brand_card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .brand_card:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            transform: translateY(-5px);
+        }
+
+        .brand_image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .brand_info {
+            padding: 15px;
+        }
+
+        .brand_name {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .brand_offer {
+            font-size: 14px;
+            color: #ff3f6c;
+            font-weight: 600;
+        }
+
+        /* Main Content Styles */
+        main {
+            min-height: calc(100vh - 200px);
+            padding: 20px 0;
+        }
+
+        .items-container {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+            justify-content: center;
+        }
+
+        .item-container {
+            width: 250px;
+            padding: 10px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            position: relative;
+            background: white;
+            cursor: pointer;
+        }
+
+        .item-container:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .item-img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 8px;
+        }
+
+        .rating {
+            font-size: 12px;
+            color: #282c3f;
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+
+        .company-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #282c3f;
+            margin-bottom: 4px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .item-nam {
+            font-size: 14px;
+            color: #535665;
+            margin-bottom: 8px;
+            font-weight: 400;
+            height: 36px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .pric {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .currnet-price {
+            font-size: 14px;
+            font-weight: 600;
+            color: #282c3f;
+        }
+
+        .orignal-price {
+            font-size: 12px;
+            color: #94969f;
+            text-decoration: line-through;
+        }
+
+        .discount-price {
+            font-size: 12px;
+            color: #ff905a;
+            font-weight: 500;
+        }
+
+        .btn-add-bag {
+            width: 100%;
+            padding: 8px 12px;
+            background-color: #ff3f6c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .btn-add-bag:hover {
+            background-color: #e63964;
+            box-shadow: 0 2px 8px rgba(255, 63, 108, 0.3);
+        }
+
+        .btn-add-bag:active {
+            transform: scale(0.98);
+        }
+
+        /* Newsletter Section */
+        .newsletter_section {
+            background: #f5f5f6;
+            padding: 40px 4%;
+            text-align: center;
+            margin: 50px 0;
+        }
+
+        .newsletter_title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .newsletter_subtitle {
+            font-size: 16px;
+            color: #696b79;
+            margin-bottom: 20px;
+        }
+
+        .newsletter_form {
+            display: flex;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .newsletter_input {
+            flex-grow: 1;
+            padding: 12px 16px;
+            border: 1px solid #eaeaec;
+            border-radius: 4px 0 0 4px;
+            font-size: 14px;
+        }
+
+        .newsletter_btn {
+            background: #ff3f6c;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 0 4px 4px 0;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .newsletter_btn:hover {
+            background: #e63964;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #fafbfc;
+            margin-top: 40px;
+        }
+
+        .footer_container {
+            padding: 30px 0px 40px 0px;
+            background: #FAFBFC;
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        .footer_column {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer_column h3 {
+            color: #282c3f;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .footer_column a {
+            color: #696b79;
+            font-size: 15px;
+            text-decoration: none;
+            padding-bottom: 5px;
+            transition: color 0.2s ease;
+        }
+
+        .footer_column a:hover {
+            color: #ff3f6c;
+        }
+
+        .copyright {
+            color: #94969f;
+            text-align: end;
+            padding: 15px;
+            font-size: 14px;
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            background-color: #eaeaec;
+            margin: 0 4%;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .nav_bar {
+                min-width: 400px;
+            }
+            
+            .search_bar {
+                min-width: 300px;
+            }
+            
+            .category_grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .brand_grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-wrap: wrap;
+                height: auto;
+                padding: 10px 0;
+            }
+            
+            .logo_container {
+                margin-left: 20px;
+            }
+            
+            .nav_bar {
+                order: 3;
+                width: 100%;
+                min-width: auto;
+                margin-top: 10px;
+                justify-content: space-around;
+            }
+            
+            .search_bar {
+                order: 2;
+                min-width: 200px;
+                width: 60%;
+            }
+            
+            .action_bar {
+                margin-right: 20px;
+                min-width: 200px;
+            }
+            
+            .category_grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .brand_grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .item-container {
+                width: 160px;
+            }
+            
+            .item-img {
+                height: 200px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav_bar {
+                overflow-x: auto;
+                justify-content: flex-start;
+                padding: 0 10px;
+            }
+            
+            .nav_bar a {
+                white-space: nowrap;
+                margin-right: 15px;
+            }
+            
+            .search_bar {
+                min-width: 150px;
+            }
+            
+            .action_bar {
+                min-width: 150px;
+            }
+            
+            .category_grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .brand_grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .item-container {
+                width: 140px;
+            }
+            
+            .item-img {
+                height: 180px;
+            }
+            
+            .footer_container {
+                flex-direction: column;
+                padding-left: 20px;
+            }
+            
+            .footer_column {
+                margin-bottom: 20px;
+            }
+            
+            .deal_timer {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -41,16 +673,104 @@
             </a>
         </div>
     </header>
+    
     <main>
+        <!-- Main Banner -->
+        <section class="main_banner">
+            <img class="banner_image" src="https://assets.myntassets.com/f_webp,w_980,c_limit,fl_progressive,dpr_2.0/assets/images/2025/OCTOBER/11/b4YhDJT5_7214b1611d794502a26a65a5e13ec18e.jpg " alt="Summer Sale Banner">
+        </section>
+        
+        <!-- Categories Section -->
+        <section class="category_section">
+            <h2 class="section_heading">Shop By Category</h2>
+            <div class="category_grid">
+                <div class="category_card">
+                    <img class="category_image" src="https://assets.myntassets.com/f_webp,dpr_1.0,q_60,w_210,c_limit,fl_progressive/assets/images/33810930/2025/5/26/5878f5fd-1a87-44d0-8403-360f715f12371748253074902-GAP-Men-Shirts-2231748253074512-1.jpg" alt="Men's Fashion">
+                    <div class="category_name">Men</div>
+                </div>
+                <div class="category_card">
+                    <img class="category_image" src="https://assets.myntassets.com/f_webp,dpr_1.5,q_60,w_210,c_limit,fl_progressive/assets/images/30985281/2024/9/30/b5f2d22b-90e3-46f5-a72c-9742272afd0b1727719599047-Indo-Era-Women-Ethnic-Motifs-Embroidered-Regular-Mirror-Work-1.jpg" alt="Women's Fashion">
+                    <div class="category_name">Women</div>
+                </div>
+                <div class="category_card">
+                    <img class="category_image" src="https://assets.myntassets.com/f_webp,dpr_1.5,q_60,w_210,c_limit,fl_progressive/assets/images/2025/SEPTEMBER/9/k2sCbKQB_f7cbfe672f474d9aaa3ae8c1939840c5.jpg" alt="Kids Fashion">
+                    <div class="category_name">Kids</div>
+                </div>
+                <div class="category_card">
+                    <img class="category_image" src="https://assets.myntassets.com/f_webp,dpr_1.0,q_60,w_210,c_limit,fl_progressive/assets/images/17361356/2022/3/3/208b5d62-8f3d-461f-adae-33604c656ba11646298944332CortinaSetOf2PinkAbstractPrintedRoomDarkeningWindowCurtains1.jpg" alt="Home & Living">
+                    <div class="category_name">Home & Living</div>
+                </div>
+                <div class="category_card">
+                    <img class="category_image" src="https://assets.myntassets.com/f_webp,dpr_1.0,q_60,w_210,c_limit,fl_progressive/assets/images/18953210/2022/10/20/c9273ce4-b8e3-4b29-9e5b-6b75278979ba1666243410360-Marks--Spencer-Unisex-Perfume-and-Body-Mist-581666243410247-1.jpg" alt="Beauty">
+                    <div class="category_name">Beauty</div>
+                </div>
+                <div class="category_card">
+                    <img class="category_image" src="https://assets.myntassets.com/f_webp,dpr_1.5,q_auto:eco,w_400,c_limit,fl_progressive/assets/images/2025/SEPTEMBER/23/u4VO9UrD_3080304974304004893043267c5b0228.jpg" alt="Studio">
+                    <div class="category_name">Studio</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Deal Section -->
+      <section class="banner_section">
+    <img class="banner_img" src="https://assets.myntassets.com/f_webp,w_980,c_limit,fl_progressive,dpr_2.0/assets/images/2024/9/30/667c37d3-ac59-4084-ae5c-dc16a6f83a631727680300290-Fwd-Desktop-Banners-----9.jpg" alt="Special Offer Banner">
+</section>
+        
+        <!-- Brands Section -->
+        <section class="brand_section">
+            <h2 class="section_heading">Top Brands</h2>
+            <div class="brand_grid">
+                <div class="brand_card">
+                    <img class="brand_image" src="data:image/png;base64,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" alt="H&M">
+                    <div class="brand_info">
+                        <div class="brand_name">H&M</div>
+                        <div class="brand_offer">Min. 40% Off</div>
+                    </div>
+                </div>
+                <div class="brand_card">
+                    <img class="brand_image" src="https://via.placeholder.com/300x200/f5f5f6/282c3f?text=ZARA" alt="Zara">
+                    <div class="brand_info">
+                        <div class="brand_name">Zara</div>
+                        <div class="brand_offer">Flat 30% Off</div>
+                    </div>
+                </div>
+                <div class="brand_card">
+                    <img class="brand_image" src="https://via.placeholder.com/300x200/f5f5f6/282c3f?text=LEVIS" alt="Levi's">
+                    <div class="brand_info">
+                        <div class="brand_name">Levi's</div>
+                        <div class="brand_offer">Buy 1 Get 1 Free</div>
+                    </div>
+                </div>
+                <div class="brand_card">
+                    <img class="brand_image" src="https://via.placeholder.com/300x200/f5f5f6/282c3f?text=NIKE" alt="Nike">
+                    <div class="brand_info">
+                        <div class="brand_name">Nike</div>
+                        <div class="brand_offer">Extra 10% Off</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Newsletter Section -->
+        <section class="newsletter_section">
+            <h2 class="newsletter_title">GET THE LATEST TRENDS FIRST</h2>
+            <p class="newsletter_subtitle">Sign up for updates and get 10% off your first order</p>
+            <form class="newsletter_form">
+                <input type="email" class="newsletter_input" placeholder="Enter your email address">
+                <button type="submit" class="newsletter_btn">SUBSCRIBE</button>
+            </form>
+        </section>
+        
+        <!-- Products Section -->
         <div class="items-container">
-          
+            <!-- Items will be populated by JavaScript -->
         </div>
     </main>
+    
     <footer>
         <div class="footer_container">
             <div class="footer_column">
                 <h3>ONLINE SHOPPING</h3>
-
                 <a href="#">Men</a>
                 <a href="#">Women</a>
                 <a href="#">Kids</a>
@@ -61,39 +781,43 @@
             </div>
 
             <div class="footer_column">
-                <h3>ONLINE SHOPPING</h3>
-
-                <a href="#">Men</a>
-                <a href="#">Women</a>
-                <a href="#">Kids</a>
-                <a href="#">Home & Living</a>
-                <a href="#">Beauty</a>
-                <a href="#">Gift Card</a>
-                <a href="#">Myntra Insider</a>
+                <h3>CUSTOMER POLICIES</h3>
+                <a href="#">Contact Us</a>
+                <a href="#">FAQ</a>
+                <a href="#">T&C</a>
+                <a href="#">Terms Of Use</a>
+                <a href="#">Track Orders</a>
+                <a href="#">Shipping</a>
+                <a href="#">Cancellation</a>
             </div>
 
             <div class="footer_column">
-                <h3>ONLINE SHOPPING</h3>
-
-                <a href="#">Men</a>
-                <a href="#">Women</a>
-                <a href="#">Kids</a>
-                <a href="#">Home & Living</a>
-                <a href="#">Beauty</a>
-                <a href="#">Gift Card</a>
-                <a href="#">Myntra Insider</a>
+                <h3>EXPERIENCE MYNTRA APP ON MOBILE</h3>
+                <a href="#">Android App</a>
+                <a href="#">iOS App</a>
             </div>
         </div>
         <hr>
-
         <div class="copyright">
             © 2023 www.myntra.com. All rights reserved.
         </div>
     </footer>
 
+    <script>
+
+        
+        // Newsletter form submission
+        document.querySelector('.newsletter_form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('.newsletter_input').value;
+            if (email) {
+                alert(`Thank you for subscribing with ${email}! You'll receive 10% off your first order.`);
+                this.reset();
+            }
+        });
+    </script>
+    
     <script src="./data/items.js"></script>
     <script src="./scripts/index.js"></script>
-    
-    
 </body>
 </html>
