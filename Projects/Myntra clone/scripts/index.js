@@ -9,7 +9,7 @@ function onLoad() {
 }
 
 function addToBeg(itemId) {
-  bagItem.push(itemId);
+  bagItem.unshift(itemId);
   displayBegCount();
   localStorage.setItem("bagItem", JSON.stringify(bagItem));
 }

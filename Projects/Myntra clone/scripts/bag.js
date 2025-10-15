@@ -1,44 +1,111 @@
-let bagItemObj;
-onLoad()
-function onLoad(){
-    displayBagItems();
-}
-
-function displaybagObject(){
-    
-}
+    let bagItemObj;
+    onLoad()
+    function onLoad(){
+        displaybagObject();
+        displayBagItems();
+    }
 
 
+    function removeFromBag(itemId){
+        bagItem = bagItem.filter(bagItem => bagItem != itemId)
+        localStorage.setItem("bagItem", JSON.stringify(bagItem));
+        displaybagObject();
+        displayBagItems(); 
+        displayBegCount();
+    }    
 
 
-function displayBagItems(){
-    let bagItemsContainer = document.querySelector('.bag-items-container')
-    bagItemsContainer.innerHTML = `
-    
-    <div class="bag-item-container">
-            <div class="item-left-part">
-              <img class="bag-item-img" src="../images/4.jpg">
+    function displaybagObject(){
+        console.log(bagItem)
+        bagItemObj = bagItem.map(itemId=>{
+            for(let i = 0; i < items.length; i++){
+                if(itemId == items[i].id){
+                    return items[i]
+                }
+            }
+        })
+        console.log(bagItemObj)
+    }
+
+
+
+    function displayBagItems(){
+        let bagItemsContainer = document.querySelector('.bag-items-container')
+
+        let innerHTML = ''  
+        // console.log(bagItemObj)
+        bagItemObj.forEach(item => {
+            innerHTML +=  `
+        
+        <div class="bag-item-container">
+                <div class="item-left-part">
+                <img class="bag-item-img" src="../${item.image}">
+                </div>
+                <div class="item-right-part">
+                <div class="company">${item.company}</div>
+                <div class="item-name">${item.item_name}</div>
+                <div class="price-container">
+                    <span class="current-price">Rs ${item.current_price}</span>
+                    <span class="original-price">Rs ${item.original_price}</span>
+                    <span class="discount-percentage">(${item.discount_percentage}% OFF)</span>
+                </div>
+                <div class="return-period">
+                    <span class="return-period-days">${item.return_period} days</span> return available
+                </div>
+                <div class="delivery-details">
+                    Delivery by
+                    <span class="delivery-details-days">${item.delivery_date}</span>
+                </div>
+                </div>
+
+                <div class="remove-from-cart" onclick='removeFromBag(${item.id})'>X</div>
             </div>
-            <div class="item-right-part">
-              <div class="company">ADIDAS</div>
-              <div class="item-name">Men Printed Polo Collar Indian Cricket ODI Jersey</div>
-              <div class="price-container">
-                <span class="current-price">Rs 999</span>
-                <span class="original-price">Rs 999</span>
-                <span class="discount-percentage">(0% OFF)</span>
-              </div>
-              <div class="return-period">
-                <span class="return-period-days">14 days</span> return available
-              </div>
-              <div class="delivery-details">
-                Delivery by
-                <span class="delivery-details-days">10 Oct 2023</span>
-              </div>
-            </div>
+        
+        
+        `
+        });
 
-            <div class="remove-from-cart">X</div>
+        bagItemsContainer.innerHTML = innerHTML;
+
+    }
+
+
+
+
+    function bagSummary(){
+        let totalPrice =  document.querySelector('.')
+
+        totalPrice.innerHTML = `
+        <div class="bag-details-container">
+            <div class="price-header">PRICE DETAILS (2 Items) </div>
+            <div class="price-item">
+              <span class="price-item-tag">Total MRP</span>
+              <span class="price-item-value">Rs1284</span>
+            </div>
+            <div class="price-item">
+              <span class="price-item-tag">Discount on MRP</span>
+              <span class="price-item-value priceDetail-base-discount">-Rs143</span>
+            </div>
+            <div class="price-item">
+              <span class="price-item-tag">Convenience Fee</span>
+              <span class="price-item-value">Rs 99</span>
+            </div>
+            <hr>
+            <div class="price-footer">
+              <span class="price-item-tag">Total Amount</span>
+              <span class="price-item-value">Rs 1240</span>
+            </div>
           </div>
-    
-    
-    `
-}
+          <button class="btn-place-order">
+            <div class="css-xjhrni">PLACE ORDER</div>
+          </button>
+        
+        
+        
+        
+        
+        
+        
+        
+        `
+    }
