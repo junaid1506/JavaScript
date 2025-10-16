@@ -1,8 +1,9 @@
-    let bagItemObj;
+let bagItemObj;
     onLoad()
     function onLoad(){
         displaybagObject();
         displayBagItems();
+        bagSummary();
     }
 
 
@@ -12,6 +13,7 @@
         displaybagObject();
         displayBagItems(); 
         displayBegCount();
+        bagSummary();
     }    
 
 
@@ -33,7 +35,7 @@
         let bagItemsContainer = document.querySelector('.bag-items-container')
 
         let innerHTML = ''  
-        // console.log(bagItemObj)
+        console.log(bagItemObj)
         bagItemObj.forEach(item => {
             innerHTML +=  `
         
@@ -73,39 +75,44 @@
 
 
     function bagSummary(){
-        let totalPrice =  document.querySelector('.')
+        let totalPrice =  document.querySelector('.bag-summary')
+        let totalMRP = 0
+        let numOfItems = bagItem.length 
+        let discount = 0
+        const convenience = 99
+
+        bagItemObj.forEach(item2=>{
+            totalMRP += item2.current_price
+            discount += item2.original_price - item2.current_price;
+           
+        })
+     let grandTotal = totalMRP - discount + convenience
+
 
         totalPrice.innerHTML = `
         <div class="bag-details-container">
-            <div class="price-header">PRICE DETAILS (2 Items) </div>
+            <div class="price-header">PRICE DETAILS (${numOfItems} Items) </div>
             <div class="price-item">
               <span class="price-item-tag">Total MRP</span>
-              <span class="price-item-value">Rs1284</span>
+              <span class="price-item-value">Rs ${totalMRP}</span>
             </div>
             <div class="price-item">
               <span class="price-item-tag">Discount on MRP</span>
-              <span class="price-item-value priceDetail-base-discount">-Rs143</span>
+              <span class="price-item-value priceDetail-base-discount">-Rs ${discount}</span>
             </div>
             <div class="price-item">
               <span class="price-item-tag">Convenience Fee</span>
-              <span class="price-item-value">Rs 99</span>
+              <span class="price-item-value">Rs ${convenience}</span>
             </div>
             <hr>
             <div class="price-footer">
               <span class="price-item-tag">Total Amount</span>
-              <span class="price-item-value">Rs 1240</span>
+              <span class="price-item-value">Rs ${grandTotal}</span>
             </div>
           </div>
           <button class="btn-place-order">
             <div class="css-xjhrni">PLACE ORDER</div>
           </button>
-        
-        
-        
-        
-        
-        
-        
-        
         `
+
     }
