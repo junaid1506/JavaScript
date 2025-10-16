@@ -79,13 +79,13 @@ let bagItemObj;
         let totalMRP = 0
         let numOfItems = bagItem.length 
         let discount = 0
-        const convenience = 99
 
         bagItemObj.forEach(item2=>{
-            totalMRP += item2.current_price
+            totalMRP += item2.original_price
             discount += item2.original_price - item2.current_price;
            
         })
+     const convenience = totalMRP != 0 ? 99 : 0
      let grandTotal = totalMRP - discount + convenience
 
 
